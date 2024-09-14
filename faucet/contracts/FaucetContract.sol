@@ -19,15 +19,22 @@ contract Faucet {
         return 2 + 2;
     }
 
-    function getAllFunders() external view returns (address[] memory) {
+    function getAllFunders() public view returns (address[] memory) {
         return funders;
     }
 
-    function getFunderAtIndex(uint8 index) external view returns (address) {
+    function getFunderAtIndex(uint8 index) external view returns(address) {
         address[] memory _funders = getAllFunders();
+        return _funders[index];
     }
 }
 
-// const instance = await Faucet.deployed()
+
+// --CHEAT--
+
 // truffle migrate --reset
-//  truffle console
+// truffle console
+// const instance = await Faucet.deployed()
+// instance.addFunds({from: accounts[0], value:"2"})
+// instance.getFunderAtIndex(0)
+// instance.getAllFunders()
