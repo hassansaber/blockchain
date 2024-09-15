@@ -7,7 +7,7 @@ contract Faucet {
     // int public counter = -10;
     // uint32 public test = 4294967295;
 
-    address[] public funders;
+    address[] private funders;
 
     receive() external payable {}
 
