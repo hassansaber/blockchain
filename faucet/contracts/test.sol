@@ -21,7 +21,7 @@ contract Test {
 
 
 
-   function test3() external pure returns(bytes32 data){
+   function test2() external pure returns(bytes32 data){
 
     assembly{
       let fmp := mload(0x40)
