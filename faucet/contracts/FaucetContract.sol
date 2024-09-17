@@ -7,25 +7,55 @@ contract Faucet {
     // int public counter = -10;
     // uint32 public test = 4294967295;
 
-    address[] private funders;
+    // address[] private funders;
+    uint public numFunders;
+    // mapping(uint=> address) private funders;
+    mapping(address=> bool) private funders;
+    mapping(uint=> address) private lutFunders;
+
+
+
 
     receive() external payable {}
 
     function addFunds() external payable {
-        funders.push(msg.sender);
+        // funders.push(msg.sender);
+        // uint index = numFunders++;
+        // funders[index]= msg.sender;
+        address funder = msg.sender;
+
+if (!funders[funder]) {
+    // numFunders++;
+    uint index = numFunders++;
+    funders[funder] = true;
+    lutFunders[index] = funder;
+}       
     }
 
     function justTesting() external pure returns (uint) {
         return 2 + 2;
     }
 
+    // function getAllFunders() public view returns (address[] memory) {
+    //     return funders;
+    // }
     function getAllFunders() public view returns (address[] memory) {
-        return funders;
+      address[] memory _funders = new address[](numFunders);
+      for (uint i = 0; i < numFunders; i++) {
+        _funders[i]= funders[i];
+      }
+
+      return _funders;
     }
 
+
     function getFunderAtIndex(uint8 index) external view returns(address) {
-        address[] memory _funders = getAllFunders();
-        return _funders[index];
+        // address[] memory _funders = getAllFunders();
+        // return _funders[index];
+        return lutFunders[index];
+
+
+
     }
 }
 
